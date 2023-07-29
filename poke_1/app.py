@@ -91,36 +91,133 @@ class App(customtkinter.CTk):
 
 
     def btn_mostrar_informe_1(self):
+        # B) Al presionar el boton mostrar se deberan listar los pokemones y su posicion en la lista (por terminal) 
         i = 0
-        contador_poder_mas_100_con10 = 0
+        
         for i, nombre_pokemon in enumerate(self.lista_nombre_pokemones):
-            print(f"{1} - {nombre_pokemon}")
+            print(f"{i} - {nombre_pokemon}")
             i += 1
         # 0) - Cantidad de pokemones de tipo Fuego cuyo poder de pelea con un 10% extra supere los 100 puntos.
+        contador_poder = 0
+        for indice, tipo in enumerate(self.lista_tipo_pokemones):
+            
+            if tipo == "fuego":
+                poder_mas_10 = self.lista_poder_pokemones[indice] * 1.1 
 
-        for i, elemento_pokemon in enumerate(self.lista_tipo_pokemones):
-            if elemento_pokemon == "fuego":
-                poder_mas_10 = (self.lista_poder_pokemones[i] * 0.1) + self.lista_poder_pokemones
                 if poder_mas_10 > 100:
-                    contador_poder_mas_100_con10 += 1
+                    contador_poder += 1
 
-        print(f"cantidad poder mas 10% {contador_poder_mas_100_con10}")         
+        print(f"La cantidad de pokemones de tipo fuego que su poder supera los 100 es: {contador_poder}")
+
+                
     
+        # 1) - Cantidad de pokemones de tipo Electrico cuyo poder de pelea con un 15% menos este entre los 100 y los 150 puntos.
+        # contador_poder = 0
+        # for indice, tipo in enumerate(self.lista_tipo_pokemones):
+            
+        #     if tipo == "electrico":
+        #         poder_menos_15 = self.lista_poder_pokemones[indice] * 0.85 
 
+        #         if poder_menos_15 > 100 and poder_menos_15 < 150:
+        #             contador_poder += 1
+
+        # print(f"La cantidad de pokemones de tipo electrico que su poder esta entre los 100 y los 150 es: {contador_poder}")
             
     
     def btn_mostrar_informe_2(self):
-        alert("2","2")
-    
+        # indicar el maximo de algo en un tipo de lista
+        #! 2) - Nombre y Poder del pokemon de tipo electrico con el poder mas alto.
+        maximo_poder_electrico = None
+        indice_poder_maximo_electrico = None
+        for i, nombre_pokemon in enumerate(self.lista_nombre_pokemones):
+            if elemento_pokemon == "eléctrico":
+                poder_pokemones = self.lista_poder_pokemones[i]
+                print(elemento_pokemon, poder_pokemones)
+
+                if maximo_poder_electrico == None or poder > maximo_poder_electrico:
+                    maximo_poder_electrico = poder_pokemones
+                    indice_poder_maximo_electrico = i
+
+        if maximo_poder_electrico != None:
+            poder = self.lista_poder_pokemones[indice_poder_maximo_electrico]
+            tipo = self.lista_tipo_pokemones[indice_poder_maximo_electrico]
+            nombre = self.lista_nombre_pokemones[indice_poder_maximo_electrico]
+            print()
+        else: 
+            print("no exite un maximo de electrico")    
+            
+        #! 6) - tipo de los pokemones del tipo que mas pokemones posea. 
+        # contador_agua = self.lista_tipo_pokemones.count("agua")
+        # contador_psiquico = self.lista_tipo_pokemones.count("psiquico")
+        # contador_electrico = self.lista_tipo_pokemones.count("electrico")
+        # contador_planta = self.lista_tipo_pokemones.count("planta")
+        # contador_fantasma = self.lista_tipo_pokemones.count("fantasma")
+        # contador_normal = self.lista_tipo_pokemones.count("normal")
+        # contador_fuego = self.lista_tipo_pokemones.count("fuego")
+
+        # print(f"""- Agua: {contador_agua} \n- Psiquico: {contador_psiquico} \n- Electrico: {contador_electrico} \n- Planta: {contador_planta} \n- Fantasma: {contador_fantasma} \n- Normal: {contador_normal} \n- Fuego: {contador_fuego} """)
+
+        # lista_tipos_pokemones = [
+        # contador_agua,
+        # contador_psiquico,
+        # contador_electrico,
+        # contador_planta,
+        # contador_fantasma,
+        # contador_normal,
+        # contador_fuego
+        # ]
+
+        # maxima_cantidad = 0
+        # tipo = ""
+        # for i, cantidad in enumerate(lista_tipos_pokemones):
+
+        #     if maxima_cantidad == 0 or cantidad > maxima_cantidad:
+        #         maxima_cantidad = cantidad
+
+        #         match i:
+        #             case 0:
+        #                 tipo = "agua"
+        #             case 1:
+        #                 tipo = "psiquico"
+        #             case 2:
+        #                 tipo = "electrico"
+        #             case 3:
+        #                 tipo = "planta"
+        #             case 4:
+        #                 tipo = "fantasma"
+        #             case 5:
+        #                 tipo = "normal" 
+        #             case 6:
+        #                 tipo = "fuego"                           
+
+        # print(f"El tipo maximo de tipo es: {tipo} - {maxima_cantidad}")
     def btn_mostrar_informe_3(self):
-        suma = 0
-        for numero in self.lista_poder_pokemones:
-            suma += numero
-            promedio_poder_pelea = suma / len(self.lista_poder_pokemones)
-        if numero > promedio_poder_pelea:
+         suma = 0
 
-            print (f"indice {nombre_pokemon} - valor{self.lista_nombre_pokemones}")
+         for poder in self.lista_poder_pokemones:
+             suma += poder
 
+         cantidad = len(self.lista_poder_pokemones)
+
+         if cantidad == 0:
+             print("Lista vacia")
+         else:
+
+             promedio = suma / cantidad
+             print(f"Promedio = {promedio}")
+
+             lista_nombres = []
+             for i, poder in enumerate(self.lista_poder_pokemones):
+
+                 if poder > promedio:
+                     nombre = self.lista_nombre_pokemones[i]
+                     poder = self.lista_poder_pokemones[i]
+                     lista_nombres.append(nombre)
+                     print(f"Nombre {nombre} | {poder}")
+
+             for nombre in lista_nombres:
+                 print(nombre)
+    
 
         
     def btn_cargar_pokedex_on_click(self):
@@ -132,9 +229,9 @@ class App(customtkinter.CTk):
             while elemento_pokemon != "agua" and elemento_pokemon != "psíquico" and elemento_pokemon != "eléctrico":
                elemento_pokemon = prompt("pokemon", "ingrese elemento del pokemon") 
             poder_pokemones = prompt("pokemon", "ingrese el poder del pokemon")
-            while int(poder_pokemones) < 50 or int(poder_pokemones) > 200:
+            while poder_pokemones == None or not poder_pokemones.isdigit() or int(poder_pokemones) > 200 or int(poder_pokemones) < 50:
                 poder_pokemones = prompt("pokemon", "ingrese el poder del pokemon nuevamente")
-            poder_pokemones = int(poder_pokemones)    
+       
             self.lista_nombre_pokemones.append(nombre_pokemon)
             self.lista_poder_pokemones.append(poder_pokemones)
             self.lista_tipo_pokemones.append(elemento_pokemon)    
